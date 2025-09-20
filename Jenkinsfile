@@ -17,7 +17,7 @@ pipeline {
                     keyFileVariable: 'SSH_KEY',
                     usernameVariable: 'SSH_USER'
                 )]) {
-                 ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@lb.local whoami
+                sh "ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@lb.local whoami"
                 }
             }
         }
