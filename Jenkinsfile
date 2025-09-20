@@ -18,6 +18,8 @@ pipeline {
                     usernameVariable: 'SSH_USER'
                 )]) {
                 sh "ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@lb.local whoami"
+                sh "ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@web.local whoami"
+                     
                 }
                  withCredentials([sshUserPrivateKey(
                     credentialsId: 'vagrantssh',
