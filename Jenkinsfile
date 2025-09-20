@@ -11,6 +11,8 @@ pipeline {
                 sh 'ansible --version'
                 sh 'pwd'
                 sh 'users'
+                sh 'cd ~'
+                sh 'ansible-playbook -i inventory install_nginx.yml'
             }
         }
     }
