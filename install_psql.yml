@@ -8,5 +8,4 @@
       apt:
         name: postgresql-14
         update_cache: yes
-      notify:
-        - Enable PostgreSQL
+
