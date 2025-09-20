@@ -9,6 +9,8 @@ pipeline {
 
                 // Check ansible version
                 sh 'ansible --version'
+                sh 'pwd'
+                sh 'll'
             }
         }
     }
