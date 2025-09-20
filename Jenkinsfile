@@ -17,7 +17,7 @@ pipeline {
                     keyFileVariable: 'SSH_KEY',
                     usernameVariable: 'SSH_USER'
                 )]) {
-                 sh 'ssh -i ${keyfile} vagrant@lb.local'
+                 sh 'ssh -i ${SSH_KEY} vagrant@lb.local'
                 }
             }
         }
