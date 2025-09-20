@@ -12,6 +12,8 @@ pipeline {
                 sh 'pwd'
                 sh 'users'
                 sh 'ip a'
+                sshagent(credentials: ['vagrantssh']) {
+                sh 'ansible -i inventory all -m ping'
             }
         }
     }
