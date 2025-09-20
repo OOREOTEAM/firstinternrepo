@@ -2,7 +2,7 @@
   hosts: db
   become: yes
   tasks:
-    - name: Update apt and install nginx
+    - name: Update apt and install psql
       shell: |
         sudo apt update
         sudo apt install apt install -y postgresql-14
