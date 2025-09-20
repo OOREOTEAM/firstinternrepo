@@ -12,8 +12,12 @@ pipeline {
                 sh 'pwd'
                 sh 'users'
                 sh 'ip a'
-                sshagent(credentials: ['vagrantssh']) {
-                sh 'ansible -i inventory all -m ping'
+                 withCredentials([sshUserPrivateKey(
+                    credentialsId: 'vagrantssh',
+                    keyFileVariable: 'SSH_KEY',
+                    usernameVariable: 'SSH_USER'
+                )]) {
+                 sh 'ssh -i ${keyfile} vagrant@lb.local
                 }
             }
         }
