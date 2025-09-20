@@ -11,7 +11,6 @@ pipeline {
                 sh 'ansible --version'
                 sh 'pwd'
                 sh 'users'
-                sh 'cd /home/vagrant'
                 sh 'ip a'
             }
         }
