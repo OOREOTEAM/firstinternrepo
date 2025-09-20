@@ -12,7 +12,7 @@ pipeline {
                 sh 'pwd'
                 sh 'users'
                 sh 'cd /home/vagrant'
-                sh 'ansible-playbook -i inventory install_nginx.yml'
+                sh 'ip a'
             }
         }
     }
