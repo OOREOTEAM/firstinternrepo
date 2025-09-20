@@ -1,9 +1,12 @@
-- name: install psql
+---
+- name: Install PostgreSQL 14
   hosts: db
   become: yes
+
   tasks:
-    - name: Update apt and install psql
-      shell: |
-        sudo apt update
-        sudo apt install apt install -y postgresql-14
-        
+    - name: Install postgresql
+      apt:
+        name: postgresql-14
+        update_cache: yes
+      notify:
+        - Enable PostgreSQL
