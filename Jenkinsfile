@@ -26,6 +26,16 @@ pipeline {
                 )]) {
                 sh 'ansible -i inventory lb -m ping --private-key $SSH_KEY'
                 }
+
+                sh "ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@lb.local whoami"
+                }
+                 withCredentials([sshUserPrivateKey(
+                    credentialsId: 'vagrantssh',
+                    keyFileVariable: 'SSH_KEY',
+                    usernameVariable: 'SSH_USER'
+                )]) {
+                sh 'ansible-playbook -i inventory install_nginx.yml --private-key $SSH_KEY'
+                }                
             }
         }
     }
