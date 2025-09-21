@@ -1,4 +1,4 @@
-kinspipeline {
+jenkinspipeline {
     agent any
 
     stages {
