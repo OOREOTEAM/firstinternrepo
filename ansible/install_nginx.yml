@@ -10,7 +10,6 @@
         state: latest
         update_cache: yes
   
-  tasks:
     - name: Copy Nginx configuration file
       template:
         src: templates/lb_nginx.conf.j2
