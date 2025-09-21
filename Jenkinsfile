@@ -51,7 +51,7 @@ pipeline {
                    )]
                    ) {
                 sh '''
-                ansible-playbook -i /vagrant/inventory install_psql.yml \
+                cd ansible && ansible-playbook -i /vagrant/inventory install_psql.yml \
                 --private-key  "$SSH_KEY" \
                 -e "db_user=${DB_USER}" \
                 -e "db_pass=${DB_PASS}" \
