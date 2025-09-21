@@ -17,3 +17,14 @@
     
     - name: restart postgresql
       shell: systemctl restart postgresql 
+    
+    - name: create db
+      shell: sudo -i -u postgres psql -c "CREATE DATABASE {{ dbname }};"
+  
+    - name: create user/password
+      shell: sudo -i -u postgres psql -c "CREATE USER {{ dbuser }} WITH ENCRYPTED PASSWORD '{{ dbpass }}';"
+  
+   - name: put rights on database
+     shell: sudo -i -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE {{ dbname }} TO {{ dbuser }};"
+  
+    
