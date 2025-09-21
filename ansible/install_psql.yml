@@ -19,10 +19,10 @@
       shell: systemctl restart postgresql 
 
     - name: drop db
-      shell: sudo -i -u postgres psql -c "DROP DATABASE {{ db_name }};"
+     // shell: sudo -i -u postgres psql -c "DROP DATABASE {{ db_name }};"
   
     - name: drop user
-      shell: sudo -i -u postgres psql -c "DROP USER {{ db_user }};"
+     // shell: sudo -i -u postgres psql -c "DROP USER {{ db_user }};"
     
     - name: create db
       shell: sudo -i -u postgres psql -c "CREATE DATABASE {{ db_name }};"
