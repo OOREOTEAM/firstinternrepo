@@ -20,9 +20,10 @@
 
     - name: drop db
      // shell: sudo -i -u postgres psql -c "DROP DATABASE {{ db_name }};"
-  
+      shell: sudo -i 
     - name: drop user
      // shell: sudo -i -u postgres psql -c "DROP USER {{ db_user }};"
+      shell: sudo -i 
     
     - name: create db
       shell: sudo -i -u postgres psql -c "CREATE DATABASE {{ db_name }};"
