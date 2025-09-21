@@ -1,6 +1,6 @@
 ---
 - name: Install and configure nginx
-  hosts: lb, web
+  hosts: lb
   become: yes
 
   tasks:
