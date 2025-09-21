@@ -45,7 +45,7 @@ pipeline {
                     string(credentialsId: 'dbpass', variable: 'DB_PASS'),
                     string(credentialsId: 'dbname', variable: 'DB_NAME'),
                     sshUserPrivateKey(
-                    credentialsId: 'ansible_ssh_key',
+                    credentialsId: 'vagrantssh',
                     keyFileVariable: 'SSH_KEY_FILE',
                     usernameVariable: 'SSH_USER'
                    )]
