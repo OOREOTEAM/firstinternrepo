@@ -9,3 +9,10 @@
         name: nginx
         state: latest
         update_cache: yes
+    
+    - name: Install postgresql
+      apt:
+        name: postgresql-client-14
+        state: present        
+        
+        
