@@ -35,7 +35,8 @@ pipeline {
                     keyFileVariable: 'SSH_KEY',
                     usernameVariable: 'SSH_USER'
                 )]) {
-                sh 'cd ansible && ansible-playbook -i /vagrant/inventory install_nginx.yml --private-key $SSH_KEY'
+                sh 'cd ansible && ansible-playbook -i /vagrant/inventory lb_install_nginx.yml --private-key $SSH_KEY'
+                sh 'cd ansible && ansible-playbook -i /vagrant/inventory web_install_nginx.yml --private-key $SSH_KEY'
                 sh 'cd ansible && ansible-playbook -i /vagrant/inventory install_psql.yml --private-key  $SSH_KEY'
                 sh 'cd /vagrant && ls'
                 sh 'cd /home/vagrant && ls'
