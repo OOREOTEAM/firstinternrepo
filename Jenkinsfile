@@ -35,8 +35,7 @@ pipeline {
                     keyFileVariable: 'SSH_KEY',
                     usernameVariable: 'SSH_USER'
                 )]) {
-                sh 'cd ansible'
-                sh 'ansible-playbook -i inventory install_nginx.yml --private-key $SSH_KEY'
+                sh 'cd ansible && ansible-playbook -i inventory install_nginx.yml --private-key $SSH_KEY'
                 sh 'ansible-playbook -i inventory install_psql.yml --private-key $SSH_KEY'
                 
                 }                
