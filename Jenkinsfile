@@ -37,7 +37,7 @@ pipeline {
                 )]) {
                 sh 'cd ansible && ansible-playbook -i inventory install_nginx.yml --private-key $SSH_KEY'
                 sh 'cd ansible && ansible-playbook -i inventory install_psql.yml --private-key $SSH_KEY'
-                sh 'cd /vagrant'
+                sh 'cd /vagrant && ls'
                 
                 }                
             }
