@@ -37,11 +37,29 @@ pipeline {
                 )]) {
                 sh 'cd ansible && ansible-playbook -i /vagrant/inventory lb_install_nginx.yml --private-key $SSH_KEY'
                 sh 'cd ansible && ansible-playbook -i /vagrant/inventory web_install_nginx.yml --private-key $SSH_KEY'
-                sh 'cd ansible && ansible-playbook -i /vagrant/inventory install_psql.yml --private-key  $SSH_KEY'
+                #sh 'cd ansible && ansible-playbook -i /vagrant/inventory install_psql.yml --private-key  $SSH_KEY'
                 sh 'cd /vagrant && ls'
-                        
+                  }   
+                  withCredentials([
+                    string(credentialsId: 'dbuser', variable: 'DB_USER'),
+                    string(credentialsId: 'dbpass', variable: 'DB_PASS'),
+                    string(credentialsId: 'dbname', variable: 'DB_NAME'),
+                    sshUserPrivateKey(
+                    credentialsId: 'ansible_ssh_key',
+                    keyFileVariable: 'SSH_KEY_FILE',
+                    usernameVariable: 'SSH_USER'
+                   )]
+                   ) {
+                sh '''
+                ansible-playbook -i /vagrant/inventory install_psql.yml \
+                --private-key  "$SSH_KEY" \
+                -e "db_user=${DB_USER}" \
+                -e "db_pass=${DB_PASS}" \
+                -e "db_name=${DB_NAME}"
+                '''
+              
+                  }       
                 
-                }                
             }
         }
     }
