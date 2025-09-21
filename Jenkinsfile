@@ -46,7 +46,7 @@ pipeline {
                     string(credentialsId: 'dbname', variable: 'DB_NAME'),
                     sshUserPrivateKey(
                     credentialsId: 'vagrantssh',
-                    keyFileVariable: 'SSH_KEY_FILE',
+                    keyFileVariable: 'SSH_KEY',
                     usernameVariable: 'SSH_USER'
                    )]
                    ) {
