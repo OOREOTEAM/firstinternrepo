@@ -1,5 +1,5 @@
 ---
-- name: Install and configure nginx
+- name: Install and configure nginx + postgresql client
   hosts: web
   become: yes
 
@@ -10,7 +10,7 @@
         state: latest
         update_cache: yes
     
-    - name: Install postgresql
+    - name: Install postgresql client
       apt:
         name: postgresql-client-14
         state: present        
