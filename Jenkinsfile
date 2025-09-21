@@ -1,4 +1,4 @@
-jenkinspipeline {
+pipeline {
     agent any
 
     stages {
