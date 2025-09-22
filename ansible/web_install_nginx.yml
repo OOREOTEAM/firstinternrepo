@@ -19,13 +19,6 @@
         #mode: '0644'
       notify: Reload Nginx
   
-  handlers:
-    - name: Reload Nginx
-      ansible.builtin.service:
-        name: nginx
-        state: reloaded
-
-   
     - name: Install postgresql client
       apt:
         name: postgresql-client-14
@@ -35,3 +28,9 @@
       copy:
         src: week1/rhnatyshyn/flask
         dest: flask
+
+  handlers:
+    - name: Reload Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
