@@ -34,4 +34,4 @@
     - name: Copy frontend build
       copy:
         src: week1/rhnatyshyn/flask
-       dest: flask
+        dest: flask
