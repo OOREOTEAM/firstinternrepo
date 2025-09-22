@@ -1,6 +1,6 @@
 ---
 - name: Install and configure nginx + postgresql client
-  hosts: test
+  hosts: web
   become: yes
 
   tasks:
