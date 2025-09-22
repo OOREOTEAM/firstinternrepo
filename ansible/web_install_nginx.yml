@@ -1,6 +1,6 @@
 ---
 - name: Install and configure nginx + postgresql client
-  hosts: web
+  hosts: test
   become: yes
 
   tasks:
@@ -30,5 +30,8 @@
       apt:
         name: postgresql-client-14
         state: present        
-        
-        
+    
+    - name: Copy frontend build
+      copy:
+        src: week1/rhnatyshyn/flask
+       dest: flask
