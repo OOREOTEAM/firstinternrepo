@@ -10,6 +10,16 @@
         state: latest
         update_cache: yes
     
+    - name: Copy Nginx configuration file
+      template:
+        src: templates/web_nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+        #owner: root
+        #group: root
+        #mode: '0644'
+      notify: Reload Nginx
+
+    
     - name: Install postgresql client
       apt:
         name: postgresql-client-14
