@@ -3,10 +3,6 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from decouple import config
-import psycopg2
-
-#db_connection = psycopg2.connect("dbname=test, user=postgres password=")
-
 db = SQLAlchemy()
 
 def create_app():
