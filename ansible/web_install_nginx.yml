@@ -29,6 +29,12 @@
         src: ../week1/rhnatyshyn/flask
         dest: .
     
+    - name: Copy .env
+      template:
+        src: templates/.env.j2
+        dest: ../week1/rhnatyshyn/flask
+        
+    
     - name: Preconfigure and run Flask app
       shell: |
         cd flask
