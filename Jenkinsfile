@@ -33,13 +33,24 @@ pipeline {
                 }
 
                 stage('Configure web') {
-                    steps {
-                        withCredentials([sshUserPrivateKey(
-                            credentialsId: 'vagrantssh',
-                            keyFileVariable: 'SSH_KEY',
-                            usernameVariable: 'SSH_USER'
-                        )]) {
-                            sh 'cd ansible && ansible-playbook -i /vagrant/inventory web_install_nginx.yml --private-key $SSH_KEY'
+                     steps {
+                        withCredentials([
+                            string(credentialsId: 'dbuser', variable: 'DB_USER'),
+                            string(credentialsId: 'dbpass', variable: 'DB_PASS'),
+                            string(credentialsId: 'dbname', variable: 'DB_NAME'),
+                            sshUserPrivateKey(
+                                credentialsId: 'vagrantssh',
+                                keyFileVariable: 'SSH_KEY',
+                                usernameVariable: 'SSH_USER'
+                            )
+                        ]) {
+                        sh '''
+                            cd ansible && ansible-playbook -i /vagrant/inventory web_install_nginx.yml \
+                            --private-key "$SSH_KEY" \
+                            -e "db_user=${DB_USER}" \
+                            -e "db_pass=${DB_PASS}" \
+                            -e "db_name=${DB_NAME}"
+                            '''
                       }
                   }
                 }
