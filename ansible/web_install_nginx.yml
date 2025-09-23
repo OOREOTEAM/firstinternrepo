@@ -32,7 +32,7 @@
     - name: Copy .env
       template:
         src: templates/.env.j2
-        dest: ../week1/rhnatyshyn/flask
+        dest: flask
         
     
     - name: Preconfigure and run Flask app
