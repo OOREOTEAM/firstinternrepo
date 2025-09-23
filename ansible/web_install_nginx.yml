@@ -33,8 +33,12 @@
       template:
         src: templates/.env.j2
         dest: flask/.env
+
+    - name: Install systemd service for flaskbird
+      template:
+        src: templates/flaskbird.service.j2
+        dest: /etc/systemd/system/flaskbird.service
         
-    
     - name: Preconfigure and run Flask app
       shell: |
         cd flask
@@ -44,6 +48,7 @@
         source flasktest/bin/activate 
         pip install -r requirements.txt
         pip install flask flask_login flask_sqlalchemy flask_migrate psycopg2-binary gunicorn
+        sudo systemctl start flaskbird
       args:
         executable: /bin/bash
 
