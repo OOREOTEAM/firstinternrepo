@@ -1,6 +1,6 @@
 ---
 - name: Install and configure nginx + postgresql client
-  hosts: test
+  hosts: web
   become: yes
 
   tasks:
@@ -19,13 +19,6 @@
         #mode: '0644'
       notify: Reload Nginx
   
-  handlers:
-    - name: Reload Nginx
-      ansible.builtin.service:
-        name: nginx
-        state: reloaded
-
-   
     - name: Install postgresql client
       apt:
         name: postgresql-client-14
@@ -33,5 +26,37 @@
     
     - name: Copy frontend build
       copy:
-        src: week1/rhnatyshyn/flask
-       dest: flask
+        src: ../week1/rhnatyshyn/flask
+        dest: .
+    
+    - name: Copy .env
+      template:
+        src: templates/.env.j2
+        dest: flask/.env
+
+    - name: Install systemd service for flaskbird
+      template:
+        src: templates/flaskbird.service.j2
+        dest: /etc/systemd/system/flaskbird.service
+        
+    - name: Preconfigure and run Flask app
+      shell: |
+        cd flask
+        sudo apt install python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools -y
+        sudo apt install python3-venv -y
+        python3 -m venv flasktest
+        source flasktest/bin/activate 
+        pip install -r requirements.txt
+        pip install flask flask_login flask_sqlalchemy flask_migrate psycopg2-binary gunicorn
+        
+        sudo rm /home/vagrant/flask/birdproject/static
+        sudo ln -s /vagrant /home/vagrant/flask/birdproject/static
+        sudo systemctl start flaskbird
+      args:
+        executable: /bin/bash
+
+  handlers:
+    - name: Reload Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
