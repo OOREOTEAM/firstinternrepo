@@ -1,4 +1,4 @@
-name: Linters and Formatters
+name: Gitleaks
 
 on:
     push: #all branches
@@ -19,4 +19,5 @@ jobs:
             - name: Run Gitleaks             
               uses: gitleaks/gitleaks-action@v2
               env:
+                GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE}}
                 GITLEAKS_CONFIG: './.gitleaks.toml' #optianal step,  gitleaks/gitleaks-action@v2 has prebuild configuration
