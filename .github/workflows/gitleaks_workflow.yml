@@ -2,10 +2,7 @@ name: Gitleaks
 
 on:
     push: #all branches
-    pull_request:
-        types:
-            - opened
-
+    
     workflow_dispatch:
 
 jobs:
