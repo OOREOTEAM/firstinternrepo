@@ -2,9 +2,9 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash,
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from flask_login import login_user, logout_user, login_required, current_user
-from .models import User
+from .models import User, Photo, Hunter
 from . import db
-from .models import Photo
+from passlib.hash import sha256_crypt
 import os
 
 auth = Blueprint('auth', __name__)
@@ -57,14 +57,12 @@ def signup_post():
 def success():
     if 'file' not in request.files:
         flash('Файл не знайдено')
-        print("1")
         return render_template('profile.html', name=current_user.username)
 
 
     f = request.files['file']
     if f.filename == '':
         flash('Ви не обрали файл')
-        print("2")
         return render_template('profile.html', name=current_user.username)
 
     filename = secure_filename(f.filename)
@@ -82,8 +80,6 @@ def success():
     db.session.commit()
 
     flash('Файл успішно завантажено!')
-    print("3")
-    #return render_template('profile.html', filename=filename, name=current_user.username)
     return redirect(url_for('main.profile'))
 
 @auth.route('/logout')
@@ -91,3 +87,19 @@ def success():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
+
+@auth.route('/report_page')
+def report_page():
+    return render_template('report-page.html')
+
+
+@auth.route('/report_page', methods=['POST'])
+def report_page_post():
+    ip = request.form.get('ip')
+    ip_hash =sha256_crypt.hash(ip)
+    hunters_ip_hash = Hunter(ip_hash=ip_hash)
+    db.session.add(hunters_ip_hash)
+    db.session.commit()
+    return redirect(url_for('main.index'))
+
