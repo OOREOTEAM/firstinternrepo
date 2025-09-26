@@ -14,3 +14,7 @@ class Photo(db.Model):
     caption = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('photos', lazy=True))
+
+class Hunter(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ip_hash = db.Column(db.String(128), nullable=False)
