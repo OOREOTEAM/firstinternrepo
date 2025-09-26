@@ -2,9 +2,21 @@
 
 {% block content %}
 <h1 class="title">
-  Flask Login Example
+  Welcome to our Birdwatching website
 </h1>
 <h2 class="subtitle">
-  Easy authentication and authorization in Flask.
+  Nice to see you here
 </h2>
+
+{% for photo in photos %}
+  <div>
+    <img src="{{ url_for('static', filename=photo.filename) }}"
+         alt="Зображення {{ loop.index }}"
+         style="max-width: 200px; height: auto; border: 1px solid #ddd; border-radius: 4px;">
+    {% if photo.caption %}
+      <p>{{ photo.caption }}</p>
+    {% endif %}
+  </div>
+{% endfor %}
+
 {% endblock %}
