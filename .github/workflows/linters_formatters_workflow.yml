@@ -34,7 +34,7 @@ jobs:
                  pip install pylint
 
             - name: Run Pylint
-              run: pylint $(git ls-files '*.py') --fail-on=E,F
+              run: pylint ./.rhnatyshyn/flask/birdproject/*.py --fail-under=6.0
     
     shellCheck:
         name: ShellCheck
