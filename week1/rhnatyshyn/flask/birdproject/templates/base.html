@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flask Auth Example</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.4/css/bulma.min.css" />
 </head>
 
 <body>
@@ -42,13 +42,18 @@
                             <a href="{{ url_for('auth.report_page') }}" class="navbar-item">
                                 Report a hunter
                             </a>
+                             {% if current_user.is_authenticated and current_user.role_id == 1 %}
+                            <a href="{{ url_for('auth.admin_page') }}" class="navbar-item">
+                                Admin
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </nav>
         </div>
 
-        <div class="hero-body">
+        <div class="hero-body has-background-primary-95 has-text-primary-95-invert">
             <div class="container has-text-centered">
                {% block content %}
                {% endblock %}

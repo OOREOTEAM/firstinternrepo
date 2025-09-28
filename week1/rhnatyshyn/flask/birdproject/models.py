@@ -1,4 +1,5 @@
 from flask_login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
 from . import db
 
 class User(UserMixin, db.Model):
@@ -7,6 +8,9 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(500))
     profile_image = db.Column(db.String(200), default='default.jpg')
     image_caption = db.Column(db.Text)
+    role_id = db.Column(db.Integer, db.ForeignKey('role.role_id'))
+    role = db.relationship('Role', backref=db.backref('role', lazy=True))
+    
 
 class Photo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -18,3 +22,7 @@ class Photo(db.Model):
 class Hunter(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     ip_hash = db.Column(db.String(128), nullable=False)
+
+class Role(db.Model):
+    role_id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(80), unique=True, nullable=False)

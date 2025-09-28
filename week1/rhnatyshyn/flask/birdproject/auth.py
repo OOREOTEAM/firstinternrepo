@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app
+from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app,abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from flask_login import login_user, logout_user, login_required, current_user
-from .models import User, Photo, Hunter
+from .models import User, Photo, Hunter, Role
 from . import db
 from passlib.hash import sha256_crypt
 import os
@@ -43,7 +43,8 @@ def signup_post():
 
     new_user = User(
         username=username,
-        password=generate_password_hash(password)
+        password=generate_password_hash(password),
+        role_id=2 #Member role
     )
 
     db.session.add(new_user)
@@ -103,3 +104,32 @@ def report_page_post():
     db.session.commit()
     return redirect(url_for('main.index'))
 
+
+@auth.route('/admin')
+@login_required
+def admin_page():
+    user_role_id = current_user.role_id
+    if user_role_id ==1:
+        photos = Photo.query.all()
+        return render_template('admin_page.html', photos=photos)
+    else:
+        abort(403)
+
+#delete photo flow
+@auth.route('/admin/delete/<int:photo_id>', methods=['POST'])
+@login_required
+def delete_photo(photo_id):
+    if current_user.role_id !=1:
+        abort(403)
+
+    photo_delete = Photo.query.get(photo_id)
+
+    try:
+        db.session.delete(photo_delete)
+        db.session.commit()
+        flash('The photo was deleted', 'admin')
+    except:
+        db.session.rollback()
+        flash('Error deleting', 'admin')
+
+    return redirect(url_for('auth.admin_page'))
