@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 from flask_login import login_user, logout_user, login_required, current_user
 from passlib.hash import sha256_crypt
 from .models import User, Photo, Hunter
+from sqlalchemy.exc import SQLAlchemyError
 from . import db
 
 auth = Blueprint('auth', __name__)
@@ -112,8 +113,7 @@ def admin_page():
     if user_role_id ==1:
         photos = Photo.query.all()
         return render_template('admin_page.html', photos=photos)
-    else:
-        abort(403)
+    abort(403)
 
 #delete photo flow
 @auth.route('/admin/delete/<int:photo_id>', methods=['POST'])
@@ -128,7 +128,7 @@ def delete_photo(photo_id):
         db.session.delete(photo_delete)
         db.session.commit()
         flash('The photo was deleted', 'admin')
-    except:
+    except SQLAlchemyError:
         db.session.rollback()
         flash('Error deleting', 'admin')
 

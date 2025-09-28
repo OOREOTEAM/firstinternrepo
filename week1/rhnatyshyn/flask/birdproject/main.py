@@ -1,6 +1,5 @@
-from flask import Blueprint , render_template
+from flask import Flask, Blueprint , render_template
 from flask_login import login_required, current_user
-from flask import *
 from .models import Photo
 
 main = Blueprint('main', __name__)
