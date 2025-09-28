@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint , render_template
+from flask import Flask, Blueprint , render_template, request
 from flask_login import login_required, current_user
 from .models import Photo, Hunter
 import hashlib
