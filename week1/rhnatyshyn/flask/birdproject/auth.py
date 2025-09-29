@@ -1,4 +1,5 @@
 import os
+import hashlib
 from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app,abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -7,6 +8,7 @@ from passlib.hash import sha256_crypt
 from .models import User, Photo, Hunter
 from sqlalchemy.exc import SQLAlchemyError
 from . import db
+
 
 auth = Blueprint('auth', __name__)
 
@@ -99,7 +101,7 @@ def report_page():
 @auth.route('/report_page', methods=['POST'])
 def report_page_post():
     ip = request.form.get('ip')
-    ip_hash =sha256_crypt.hash(ip)
+    ip_hash = hashlib.sha256(str.encode(ip)).hexdigest()
     hunters_ip_hash = Hunter(ip_hash=ip_hash)
     db.session.add(hunters_ip_hash)
     db.session.commit()
