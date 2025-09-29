@@ -1,8 +1,8 @@
-"""Add default roles values
+"""Add default roles data
 
-Revision ID: 7ffd13ffaa78
-Revises: cba185ae2591
-Create Date: 2025-09-27 10:00:15.883318
+Revision ID: 9d608e9a075a
+Revises: 
+Create Date: 2025-09-29 15:50:25.412878
 
 """
 from alembic import op
@@ -10,12 +10,11 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7ffd13ffaa78'
-down_revision = 'cba185ae2591'
+revision = '9d608e9a075a'
+down_revision = None
 branch_labels = None
 depends_on = None
 
-#Added separete migtation to pupulate Member and Admin values
 
 def upgrade():
     role_table = sa.table('role',
@@ -28,7 +27,6 @@ def upgrade():
                        {'name': 'Member'}
                    ]
     )
-
 
 def downgrade():
     op.execute("DELETE FROM role WHERE name IN ('Admin', 'Member')")
