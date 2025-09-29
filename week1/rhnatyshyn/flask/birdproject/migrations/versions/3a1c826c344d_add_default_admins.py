@@ -1,8 +1,8 @@
-"""Add default admin users
+"""Add default admins
 
-Revision ID: 7dea577e759e
-Revises: 7ffd13ffaa78
-Create Date: 2025-09-27 10:37:54.499854
+Revision ID: 3a1c826c344d
+Revises: 9d608e9a075a
+Create Date: 2025-09-29 15:59:23.440022
 
 """
 from alembic import op
@@ -14,8 +14,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # revision identifiers, used by Alembic.
-revision = '7dea577e759e'
-down_revision = '7ffd13ffaa78'
+revision = '3a1c826c344d'
+down_revision = '9d608e9a075a'
 branch_labels = None
 depends_on = None
 
