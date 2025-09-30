@@ -1,6 +1,6 @@
 # Birds Project
 
-The Birbs application is created to share photos and location for various bird species, deployed using a fully provisioned infrastructure.
+The Birds application is created to share photos and location for various bird species, deployed using a fully provisioned infrastructure.
 
 ## Project infrastructure
 
