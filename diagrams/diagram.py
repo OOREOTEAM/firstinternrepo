@@ -27,7 +27,7 @@ with Diagram(
         consul = Consul("Consul\nService Discovery")
     
     # Ansible
-    ans1 = Ansible("Ansible\nplaybook: deploy.yml")
+    ans1 = Ansible("Ansible\nplaybook")
     
     # Load Balancer / Db
     load_balancer = ELB("Load Balancer\nDNS: lb.oreo.com")
