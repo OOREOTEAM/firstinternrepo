@@ -28,6 +28,7 @@ run vagrant up
 # put inventory file for ansible into project directory with vagrantfile
 
 # do on web vm
+
 sudo systemctl stop flaskbird.service
 sudo rm -rf flask
 sudo rm /etc/systemd/system/flaskbird.service
