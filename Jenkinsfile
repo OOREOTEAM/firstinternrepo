@@ -38,6 +38,7 @@ pipeline {
                             string(credentialsId: 'dbuser', variable: 'DB_USER'),
                             string(credentialsId: 'dbpass', variable: 'DB_PASS'),
                             string(credentialsId: 'dbname', variable: 'DB_NAME'),
+                            string(credentialsId: 'default_flask_adminpass', variable: 'FLASK_PASS'),
                             sshUserPrivateKey(
                                 credentialsId: 'vagrantssh',
                                 keyFileVariable: 'SSH_KEY',
@@ -49,7 +50,8 @@ pipeline {
                             --private-key "$SSH_KEY" \
                             -e "db_user=${DB_USER}" \
                             -e "db_pass=${DB_PASS}" \
-                            -e "db_name=${DB_NAME}"
+                            -e "db_name=${DB_NAME}" \
+                            -e "flask_pass=${FLASK_PASS}" \
                             '''
                       }
                   }
