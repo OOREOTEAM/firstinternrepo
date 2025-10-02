@@ -71,7 +71,7 @@
     - name: Install requirements.txt
       pip:
          requirements: requirements.txt
-        args:
+      args:
           chdir: /home/vagrant/flask
 
 
