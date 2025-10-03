@@ -73,6 +73,14 @@
         requirements: /home/vagrant/flask/requirements.txt
         virtualenv: /home/vagrant/flask/flasktest 
     
+    - name: Create symlink for static folder
+      ansible.builtin.file:
+        src: /vagrant
+        dest: /home/vagrant/flask/birdproject/static
+        state: link
+
+
+
 
   handlers:
     - name: Reload Nginx
