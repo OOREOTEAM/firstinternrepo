@@ -44,10 +44,10 @@
       #  cd flask
       ## sudo apt install python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools -y
       ##  sudo apt install python3-venv -y
-      #  python3 -m venv flasktest
-      #  source flasktest/bin/activate 
-      #  pip install -r requirements.txt
-      #  pip install flask flask_login flask_sqlalchemy flask_migrate psycopg2-binary gunicorn
+      ##  python3 -m venv flasktest
+      ##  source flasktest/bin/activate 
+      ##  pip install -r requirements.txt
+      ##  pip install flask flask_login flask_sqlalchemy flask_migrate psycopg2-binary gunicorn
         
       #  sudo rm /home/vagrant/flask/birdproject/static
       #  sudo ln -s /vagrant /home/vagrant/flask/birdproject/static
@@ -69,10 +69,23 @@
         update_cache: yes
 
     - name: Install requirements.txt
-      pip:
-         requirements: requirements.txt
-      args:
-          chdir: /home/vagrant/flask
+      ansible.builtin.pip:
+        requirements: /home/vagrant/flask/requirements.txt
+        virtualenv: /home/vagrant/flask/flasktest 
+    
+    - name: Install flask elements
+      apt:
+        name:
+          - flask
+          - flask_login
+          - flask_sqlalchemy
+          - flask_migrate
+          - psycopg2-binary
+          - gunicorn
+        state: present
+        update_cache: yes
+
+        
 
 
   handlers:
