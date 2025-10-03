@@ -79,8 +79,10 @@
         dest: /home/vagrant/flask/birdproject/static
         state: link
 
-
-
+    - name: start flaskbird service
+      service:
+        name: flaskbird
+        state: started
 
   handlers:
     - name: Reload Nginx
