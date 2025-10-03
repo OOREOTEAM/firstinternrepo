@@ -72,6 +72,7 @@
       ansible.builtin.pip:
         requirements: /home/vagrant/flask/requirements.txt
         virtualenv: /home/vagrant/flask/flasktest 
+        virtualenv_command: python3 -m venv flasktest
     
     - name: Create symlink for static folder
       ansible.builtin.file:
