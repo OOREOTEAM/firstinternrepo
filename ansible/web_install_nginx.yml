@@ -76,7 +76,6 @@
     - name: Install flask elements
       apt:
         name:
-          - flask
           - flask_login
           - flask_sqlalchemy
           - flask_migrate
