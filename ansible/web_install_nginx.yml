@@ -68,11 +68,12 @@
         state: present
         update_cache: yes
 
-    - name: Install requirements.txt
+    - name: Create venv and install requirements.txt
       ansible.builtin.pip:
         requirements: /home/vagrant/flask/requirements.txt
         virtualenv: /home/vagrant/flask/flasktest 
         virtualenv_command: python3 -m venv flasktest
+        become: no
     
     - name: Create symlink for static folder
       ansible.builtin.file:
