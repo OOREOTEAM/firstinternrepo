@@ -73,19 +73,6 @@
         requirements: /home/vagrant/flask/requirements.txt
         virtualenv: /home/vagrant/flask/flasktest 
     
-    - name: Install flask elements
-      apt:
-        name:
-          - flask_login
-          - flask_sqlalchemy
-          - flask_migrate
-          - psycopg2-binary
-          - gunicorn
-        state: present
-        update_cache: yes
-
-        
-
 
   handlers:
     - name: Reload Nginx
