@@ -73,7 +73,7 @@
         requirements: /home/vagrant/flask/requirements.txt
         virtualenv: /home/vagrant/flask/flasktest 
         virtualenv_command: python3 -m venv flasktest
-      become: no
+      become: yes
 
     
     - name: Create symlink for static folder
