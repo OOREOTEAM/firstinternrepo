@@ -90,6 +90,14 @@
       service:
         name: flaskbird
         state: started
+    
+    - name: Change ownership of virtualenv
+      ansible.builtin.file:
+        path: /home/vagrant/flask/flasktest
+        owner: vagrant
+        group: vagrant
+        recurse: yes
+
 
   handlers:
     - name: Reload Nginx
