@@ -45,3 +45,13 @@
         state: present
       become: yes
       become_user: postgres
+
+    - name: Create PostgreSQL user db_user
+      postgresql_user:
+        name: "{{ db_user }}"
+        password: "{{ db_pass }}"
+        db: "{{ db_name }}"
+        priv: "ALL"
+        state: present
+      become: yes
+      become_user: postgres
