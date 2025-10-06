@@ -38,3 +38,10 @@
         name: postgresql
         state: started
         enabled: yes
+
+    - name: Create PostgreSQL database  
+      postgresql_db:
+        name: "{{ db_name }}"
+        state: present
+      become: yes
+      become_user: postgres
