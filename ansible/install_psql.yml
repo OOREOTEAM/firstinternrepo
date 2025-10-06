@@ -55,3 +55,9 @@
         state: present
       become: yes
       become_user: postgres
+
+  handlers:
+    - name: Restart postgresql
+      service:
+        name: postgresql
+        state: restarted
