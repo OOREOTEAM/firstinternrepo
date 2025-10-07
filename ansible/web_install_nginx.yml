@@ -14,9 +14,6 @@
       template:
         src: templates/web_nginx.conf.j2
         dest: /etc/nginx/nginx.conf
-        #owner: root
-        #group: root
-        #mode: '0644'
       notify: Reload Nginx
   
     - name: Install postgresql client
@@ -38,22 +35,6 @@
       template:
         src: templates/flaskbird.service.j2
         dest: /etc/systemd/system/flaskbird.service
-        
-   # - name: Preconfigure and run Flask app
-     # shell: |
-      #  cd flask
-      ## sudo apt install python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools -y
-      ##  sudo apt install python3-venv -y
-      ##  python3 -m venv flasktest
-      ##  source flasktest/bin/activate 
-      ##  pip install -r requirements.txt
-      ##  pip install flask flask_login flask_sqlalchemy flask_migrate psycopg2-binary gunicorn
-        
-      #  sudo rm /home/vagrant/flask/birdproject/static
-      #  sudo ln -s /vagrant /home/vagrant/flask/birdproject/static
-      #  sudo systemctl start flaskbird
-    #  args:
-    #    executable: /bin/bash
 
     - name: Install packages
       apt:
@@ -65,6 +46,7 @@
           - libffi-dev
           - python3-setuptools
           - python3-venv
+          - gunicorn
         state: present
         update_cache: yes
 
